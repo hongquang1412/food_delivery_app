@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">food_delivery_app</string>
+    <string name="facebook_app_id">1733166257546670</string>
+    <string name="fb_login_protocol_scheme">fb1733166257546670</string>
+    <string name="facebook_client_token">61f5a701ad99a776ecdccadfae84664e</string>
 </resources>
