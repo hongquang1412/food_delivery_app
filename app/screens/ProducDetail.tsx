@@ -13,6 +13,8 @@ import image2 from '.././assets/images/product-detail/product1/image2.png';
 import {icons} from '.././components/constants/icon';
 import {colors} from '.././components/constants/color';
 import Product from '.././components/Product';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {NavigationProp, RootStackParamList} from '../navigation/App';
 
 // interface IProductDetail {
 //   data: {
@@ -26,15 +28,18 @@ import Product from '.././components/Product';
 //   };
 // }
 
-const ProductDetailScreen = () => {
-  const router = useRouter();
-  const {id} = useLocalSearchParams();
+const product = {
+  id: 1,
+  name: 'Ordinary Burger',
+  img: [image1, image2],
+  price: '20.000',
+  isFavourite: false,
+  evaluate: '5',
+  distance: '200m',
+};
 
-  console.log(id);
-
-  const [quantity, setQuantity] = useState(1);
-
-  const product = {
+const productList = [
+  {
     id: 1,
     name: 'Ordinary Burger',
     img: [image1, image2],
@@ -42,46 +47,42 @@ const ProductDetailScreen = () => {
     isFavourite: false,
     evaluate: '5',
     distance: '200m',
-  };
+  },
+  {
+    id: 2,
+    name: 'Burger',
+    img: [image1],
+    price: '20.000',
+    isFavourite: true,
+    evaluate: '4.9',
+    distance: '150m',
+  },
+  {
+    id: 3,
+    name: 'Burger',
+    img: [image1],
+    price: '20.000',
+    isFavourite: true,
+    evaluate: '4.9',
+    distance: '150m',
+  },
+  {
+    id: 4,
+    name: 'Burger',
+    img: [image1],
+    price: '20.000',
+    isFavourite: true,
+    evaluate: '4.9',
+    distance: '150m',
+  },
+];
 
-  const productList = [
-    {
-      id: 1,
-      name: 'Ordinary Burger',
-      img: [image1, image2],
-      price: '20.000',
-      isFavourite: false,
-      evaluate: '5',
-      distance: '200m',
-    },
-    {
-      id: 2,
-      name: 'Burger',
-      img: [image1],
-      price: '20.000',
-      isFavourite: true,
-      evaluate: '4.9',
-      distance: '150m',
-    },
-    {
-      id: 3,
-      name: 'Burger',
-      img: [image1],
-      price: '20.000',
-      isFavourite: true,
-      evaluate: '4.9',
-      distance: '150m',
-    },
-    {
-      id: 4,
-      name: 'Burger',
-      img: [image1],
-      price: '20.000',
-      isFavourite: true,
-      evaluate: '4.9',
-      distance: '150m',
-    },
-  ];
+const ProductDetailScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+  const route = useRoute<RouteProp<RootStackParamList, 'productDetail'>>();
+  const {id} = route.params;
+
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <View style={styles.container}>
@@ -121,11 +122,11 @@ const ProductDetailScreen = () => {
             alignItems: 'center',
             paddingHorizontal: 10,
           }}>
-          <TouchableOpacity onPress={() => router.back()}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             {icons.backOutline({size: 40, color: '#fff'})}
           </TouchableOpacity>
           <Text style={{fontSize: 20, fontWeight: '800', color: '#fff'}}>
-            About This Menu
+            About This Menu {id}
           </Text>
           {product?.isFavourite ? (
             <TouchableOpacity

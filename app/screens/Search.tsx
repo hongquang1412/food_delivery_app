@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
@@ -7,44 +7,42 @@ import {
   FlatList,
   Image,
   StyleSheet,
-} from "react-native"
-import { icons } from ".././components/constants/icon";
+} from 'react-native';
+import {icons} from '.././components/constants/icon';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProp} from '../navigation/App';
+
+const categories = [
+  {id: 1, name: 'Burger', icon: 'hamburger', active: true},
+  {id: 2, name: 'Taco', icon: 'hotdog', active: false},
+  {id: 3, name: 'Drink', icon: 'cocktail', active: false},
+  {id: 4, name: 'Pizza', icon: 'pizzaSlice', active: false},
+];
+
+const recentSearches = ['Burgers', 'Fast food', 'Dessert', 'French', 'Pastry'];
+const recentOrders = [
+  {
+    id: 1,
+    name: 'Ordinary Burgers',
+    restaurant: 'Burger Restaurant',
+    rating: 4.9,
+    distance: '190m',
+    image:
+      'https://th.bing.com/th/id/OIP.2dhr5Ln6cMHIu9SmwE_uBgHaE7?rs=1&pid=ImgDetMain',
+  },
+  {
+    id: 2,
+    name: 'Ordinary Burgers',
+    restaurant: 'Burger Restaurant',
+    rating: 4.9,
+    distance: '190m',
+    image:
+      'https://th.bing.com/th/id/OIP.2dhr5Ln6cMHIu9SmwE_uBgHaE7?rs=1&pid=ImgDetMain',
+  },
+];
 
 const SearchScreen = () => {
-  const categories = [
-    { id: 1, name: "Burger", icon: "hamburger", active: true },
-    { id: 2, name: "Taco", icon: "hotdog", active: false },
-    { id: 3, name: "Drink", icon: "cocktail", active: false },
-    { id: 4, name: "Pizza", icon: "pizzaSlice", active: false },
-  ];
-
-  const recentSearches = [
-    "Burgers",
-    "Fast food",
-    "Dessert",
-    "French",
-    "Pastry",
-  ];
-  const recentOrders = [
-    {
-      id: 1,
-      name: "Ordinary Burgers",
-      restaurant: "Burger Restaurant",
-      rating: 4.9,
-      distance: "190m",
-      image:
-        "https://th.bing.com/th/id/OIP.2dhr5Ln6cMHIu9SmwE_uBgHaE7?rs=1&pid=ImgDetMain",
-    },
-    {
-      id: 2,
-      name: "Ordinary Burgers",
-      restaurant: "Burger Restaurant",
-      rating: 4.9,
-      distance: "190m",
-      image:
-        "https://th.bing.com/th/id/OIP.2dhr5Ln6cMHIu9SmwE_uBgHaE7?rs=1&pid=ImgDetMain",
-    },
-  ];
+  const navigation = useNavigation<NavigationProp>();
 
   return (
     <View style={styles.container}>
@@ -52,8 +50,7 @@ const SearchScreen = () => {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          // onPress={() => router.back()}
-        >
+          onPress={() => navigation.goBack()}>
           {icons.back({})}
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Search Food</Text>
@@ -62,32 +59,30 @@ const SearchScreen = () => {
 
       {/* Search Bar */}
       <View style={styles.searchBar}>
-        {icons.search({ size: 20, color: "#888" })}
+        {icons.search({size: 20, color: '#888'})}
         <TextInput placeholder="Search Food" style={styles.input} />
-        {icons.sliders({ size: 20, color: "#888" })}
+        {icons.sliders({size: 20, color: '#888'})}
       </View>
 
       {/* Categories */}
       <FlatList
         horizontal
         data={categories}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 8 }}
-        renderItem={({ item }) => (
+        contentContainerStyle={{paddingHorizontal: 8}}
+        renderItem={({item}) => (
           <TouchableOpacity
-            style={[styles.category, item.active && styles.categoryActive]}
-          >
+            style={[styles.category, item.active && styles.categoryActive]}>
             {icons[item.icon]({
               size: 18,
-              color: item.active ? "#fff" : "#888",
+              color: item.active ? '#fff' : '#888',
             })}
             <Text
               style={[
                 styles.categoryText,
                 item.active && styles.categoryTextActive,
-              ]}
-            >
+              ]}>
               {item.name}
             </Text>
           </TouchableOpacity>
@@ -103,23 +98,23 @@ const SearchScreen = () => {
       </View>
       {recentSearches.map((search, index) => (
         <View key={index} style={styles.recentSearch}>
-          {icons.search({ size: 18, color: "#888" })}
+          {icons.search({size: 18, color: '#888'})}
           <Text style={styles.recentSearchText}>{search}</Text>
         </View>
       ))}
 
       {/* My Recent Orders */}
       <Text style={styles.sectionTitle}>My recent orders</Text>
-      {recentOrders.map((order) => (
+      {recentOrders.map(order => (
         <View key={order.id} style={styles.orderItem}>
-          <Image source={{ uri: order.image }} style={styles.orderImage} />
+          <Image source={{uri: order.image}} style={styles.orderImage} />
           <View>
             <Text style={styles.orderTitle}>{order.name}</Text>
             <Text style={styles.orderSubtitle}>{order.restaurant}</Text>
             <View style={styles.orderDetails}>
-              {icons.star({ size: 14, color: "gold" })}
+              {icons.star({size: 14, color: 'gold'})}
               <Text style={styles.rating}>{order.rating}</Text>
-              {icons.location({ size: 14, color: "#888" })}
+              {icons.location({size: 14, color: '#888'})}
               <Text style={styles.distance}>{order.distance}</Text>
             </View>
           </View>
@@ -132,33 +127,33 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 16,
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 16,
-    position: "relative",
+    position: 'relative',
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
     flex: 1,
   },
   backButton: {
-    position: "absolute",
-    left: 16
+    position: 'absolute',
+    left: 16,
   },
   placeholder: {
     width: 40,
   },
   searchBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#f2f2f2",
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
     borderRadius: 10,
     paddingHorizontal: 12,
     height: 60,
@@ -169,40 +164,40 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   category: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 20,
-    backgroundColor: "#f2f2f2",
+    backgroundColor: '#f2f2f2',
     marginRight: 8,
     width: 80,
     height: 80,
   },
   categoryActive: {
-    backgroundColor: "#FF8C00",
+    backgroundColor: '#FF8C00',
   },
   categoryText: {
     fontSize: 14,
-    color: "#888",
+    color: '#888',
   },
   categoryTextActive: {
-    color: "#fff",
+    color: '#fff',
   },
   section: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   deleteText: {
-    color: "red",
+    color: 'red',
     fontSize: 20,
   },
   recentSearch: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 12,
   },
   recentSearchText: {
@@ -210,8 +205,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   orderItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 8,
   },
   orderImage: {
@@ -222,15 +217,15 @@ const styles = StyleSheet.create({
   },
   orderTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   orderSubtitle: {
     fontSize: 18,
-    color: "#888",
+    color: '#888',
   },
   orderDetails: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 4,
   },
   rating: {

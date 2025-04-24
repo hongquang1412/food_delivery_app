@@ -10,19 +10,11 @@ import React, {useState} from 'react';
 import {colors} from '.././components/constants/color';
 import {Checkbox} from 'react-native-paper';
 import {icons} from '.././components/constants/icon';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
-import {RootStackParamList} from '../navigation/App';
-import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
-import {TabParamList} from '../navigation/TabBar';
-
-type HomeScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<TabParamList, 'home'>,
-  StackNavigationProp<RootStackParamList>
->;
+import {useNavigation} from '@react-navigation/native';
+import { NavigationProp } from '../navigation/App';
 
 const RegisterScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   const [email, setEmail] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');

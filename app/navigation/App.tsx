@@ -16,6 +16,7 @@ import SettingsScreen from '../screens/Settings';
 import HelpCenterScreen from '../screens/HelpCenter';
 import TabBar, {TabParamList} from './TabBar';
 import {NavigatorScreenParams} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
   onboarding: undefined;
@@ -27,13 +28,16 @@ export type RootStackParamList = {
   orderEmpty: undefined;
   resetPassword: undefined;
   search: undefined;
-  productDetail: undefined;
+  productDetail: {id: number};
   chatDetail: undefined;
   personalData: undefined;
   settings: undefined;
   helpCenter: undefined;
   tabBar: NavigatorScreenParams<TabParamList>;
 };
+
+// type của navigation
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Stack = createStackNavigator<RootStackParamList>();
 

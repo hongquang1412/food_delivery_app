@@ -19,72 +19,69 @@ import image1 from '.././assets/images/product-detail/product1/image1.png';
 import image2 from '.././assets/images/product-detail/product1/image2.png';
 import Product from '.././components/Product';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/App';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {NavigationProp} from '../navigation/App';
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+const categories = [
+  {
+    name: 'Burger',
+    img: burger,
+  },
+  {
+    name: 'Taco',
+    img: taco,
+  },
+  {
+    name: 'Drink',
+    img: drink,
+  },
+  {
+    name: 'Pizza',
+    img: pizza,
+  },
+];
+
+const productList = [
+  {
+    id: 1,
+    name: 'Ordinary Burger',
+    img: [image1, image2],
+    price: '20.000',
+    isFavourite: false,
+    evaluate: '5',
+    distance: '200m',
+  },
+  {
+    id: 2,
+    name: 'Burger',
+    img: [image1],
+    price: '20.000',
+    isFavourite: true,
+    evaluate: '4.9',
+    distance: '150m',
+  },
+  {
+    id: 3,
+    name: 'Burger',
+    img: [image1],
+    price: '20.000',
+    isFavourite: true,
+    evaluate: '4.9',
+    distance: '150m',
+  },
+  {
+    id: 4,
+    name: 'Burger',
+    img: [image1],
+    price: '20.000',
+    isFavourite: true,
+    evaluate: '4.9',
+    distance: '150m',
+  },
+];
 
 const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   const [category, setCategory] = useState('Burger');
-
-  const categories = [
-    {
-      name: 'Burger',
-      img: burger,
-    },
-    {
-      name: 'Taco',
-      img: taco,
-    },
-    {
-      name: 'Drink',
-      img: drink,
-    },
-    {
-      name: 'Pizza',
-      img: pizza,
-    },
-  ];
-
-  const productList = [
-    {
-      id: 1,
-      name: 'Ordinary Burger',
-      img: [image1, image2],
-      price: '20.000',
-      isFavourite: false,
-      evaluate: '5',
-      distance: '200m',
-    },
-    {
-      id: 2,
-      name: 'Burger',
-      img: [image1],
-      price: '20.000',
-      isFavourite: true,
-      evaluate: '4.9',
-      distance: '150m',
-    },
-    {
-      id: 3,
-      name: 'Burger',
-      img: [image1],
-      price: '20.000',
-      isFavourite: true,
-      evaluate: '4.9',
-      distance: '150m',
-    },
-    {
-      id: 4,
-      name: 'Burger',
-      img: [image1],
-      price: '20.000',
-      isFavourite: true,
-      evaluate: '4.9',
-      distance: '150m',
-    },
-  ];
 
   return (
     <ScrollView style={styles.container}>

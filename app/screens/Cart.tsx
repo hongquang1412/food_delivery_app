@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,10 @@ import {
   ScrollView,
 } from 'react-native';
 import CartItem from '.././components/CartItem';
-import {icons} from '.././components/constants/icon';
+import { icons } from '.././components/constants/icon';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/App';
+import { useNavigation } from '@react-navigation/native';
 
 interface ICartItemType {
   id: number;
@@ -18,8 +21,10 @@ interface ICartItemType {
   image: string;
 }
 
+type CartScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 const CartScreen = () => {
-  const router = useRouter();
+  const navigation = useNavigation<CartScreenNavigationProp>();
   const [cartItems, setCartItems] = useState<Array<ICartItemType>>([
     {
       id: 1,
@@ -70,7 +75,7 @@ const CartScreen = () => {
   const handleIncreaseQuantity = (id: number) => {
     setCartItems(
       cartItems.map(item =>
-        item.id === id ? {...item, quantity: item.quantity + 1} : item,
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
       ),
     );
   };
@@ -79,7 +84,7 @@ const CartScreen = () => {
     setCartItems(
       cartItems.map(item =>
         item.id === id && item.quantity > 1
-          ? {...item, quantity: item.quantity - 1}
+          ? { ...item, quantity: item.quantity - 1 }
           : item,
       ),
     );
@@ -89,7 +94,7 @@ const CartScreen = () => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => router.back()}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           {icons.back({})}
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Cart</Text>
@@ -258,7 +263,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fff',
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,

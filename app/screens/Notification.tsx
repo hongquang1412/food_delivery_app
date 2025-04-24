@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-
 import {NotificationType} from '.././enum';
 import {icons} from '.././components/constants/icon';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProp} from '../navigation/App';
 
 interface INotificationProps {
   id: number;
@@ -50,7 +51,9 @@ const notifications = [
   },
 ];
 
-export default function NotificationScreen() {
+const NotificationScreen = () => {
+  const navigation = useNavigation<NavigationProp>();
+
   const renderNotification = ({
     type,
     icon,
@@ -96,11 +99,7 @@ export default function NotificationScreen() {
       <View style={styles.headerContainer}>
         <TouchableOpacity
           onPress={() => {
-            if (router.canGoBack()) {
-              router.back();
-            } else {
-              router.push('/');
-            }
+            navigation.goBack();
           }}
           style={styles.backButton}>
           {icons.back({size: 28, color: '#007BFF'})}
@@ -117,7 +116,9 @@ export default function NotificationScreen() {
       />
     </View>
   );
-}
+};
+
+export default NotificationScreen;
 
 const styles = StyleSheet.create({
   container: {

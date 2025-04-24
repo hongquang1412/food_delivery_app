@@ -21,16 +21,9 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
-import {RootStackParamList} from '../navigation/App';
-import {CompositeNavigationProp, useNavigation} from '@react-navigation/native';
-import {TabParamList} from '../navigation/TabBar';
+import { useNavigation} from '@react-navigation/native';
+import { NavigationProp } from '../navigation/App';
 
-type HomeScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<TabParamList, 'home'>,
-  StackNavigationProp<RootStackParamList>
->;
 
 const webClientId =
   '1077560406644-q2emn7vqdeqhbnfdnrs6a67m7ra6r50n.apps.googleusercontent.com';
@@ -42,7 +35,7 @@ GoogleSignin.configure({
 });
 
 const LoginScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

@@ -13,13 +13,7 @@ import onboarding3 from '.././assets/images/onboarding/onboarding3.png';
 import {colors} from '.././components/constants/color';
 import {icons} from '.././components/constants/icon';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../navigation/App';
-import {StackNavigationProp} from '@react-navigation/stack';
-
-type OnboardingScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'onboarding'
->;
+import {NavigationProp} from '../navigation/App';
 
 interface ISlide {
   id: number;
@@ -28,31 +22,31 @@ interface ISlide {
   des: string;
 }
 
+const slides: Array<ISlide> = [
+  {
+    id: 1,
+    img: onboarding1,
+    title: 'We serve incomparable delicacies 1',
+    des: "All the best restaurants with their top menu waiting for you, they cant't wait for your order!!",
+  },
+  {
+    id: 2,
+    img: onboarding2,
+    title: 'We serve incomparable delicacies 2',
+    des: "All the best restaurants with their top menu waiting for you, they cant't wait for your order!!",
+  },
+  {
+    id: 3,
+    img: onboarding3,
+    title: 'We serve incomparable delicacies 3',
+    des: "All the best restaurants with their top menu waiting for you, they cant't wait for your order!!",
+  },
+];
+
 const OnBoardingScreen = () => {
-  const navigation = useNavigation<OnboardingScreenNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   const [slide, setSide] = useState(0);
   const [isCompleteOnboarding, setCompleteOnboarding] = useState(false);
-
-  const slides: Array<ISlide> = [
-    {
-      id: 1,
-      img: onboarding1,
-      title: 'We serve incomparable delicacies 1',
-      des: "All the best restaurants with their top menu waiting for you, they cant't wait for your order!!",
-    },
-    {
-      id: 2,
-      img: onboarding2,
-      title: 'We serve incomparable delicacies 2',
-      des: "All the best restaurants with their top menu waiting for you, they cant't wait for your order!!",
-    },
-    {
-      id: 3,
-      img: onboarding3,
-      title: 'We serve incomparable delicacies 3',
-      des: "All the best restaurants with their top menu waiting for you, they cant't wait for your order!!",
-    },
-  ];
 
   const handleNext = (nextSlide: number) => {
     if (nextSlide < slides.length - 1) {

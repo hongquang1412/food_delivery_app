@@ -9,6 +9,8 @@ import {
 import {icons} from '.././components/constants/icon';
 import {colors} from '.././components/constants/color';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {NavigationProp} from '../navigation/App';
 
 interface IProps {
   data: {
@@ -23,6 +25,7 @@ interface IProps {
 }
 
 const Product = (props: IProps) => {
+  const navigation = useNavigation<NavigationProp>();
   const {data} = props;
 
   const handleFavourite = (id: number, isFavourite: boolean) => {
@@ -30,11 +33,10 @@ const Product = (props: IProps) => {
     console.log(isFavourite);
   };
 
-  const handleProductDetail = (id: number) => {
-    // router.push({
-    //   pathname: '/product-detail/[id]',
-    //   params: {id},
-    // });
+  const handleProductDetail = (id: number ) => {
+    navigation.navigate('productDetail', {
+      id,
+    });
   };
 
   return (
